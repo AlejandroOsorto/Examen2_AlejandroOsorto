@@ -42,7 +42,7 @@ public class AdminCliente
         this.archivo = archivo;
     }
     
-    public void setUsuario(Cliente u)
+    public void setClente(Cliente u)
     {
         listaClientes.add(u);
     }

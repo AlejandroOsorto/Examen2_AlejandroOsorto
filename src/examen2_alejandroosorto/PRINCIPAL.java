@@ -5,6 +5,9 @@
  */
 package examen2_alejandroosorto;
 
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Ale
@@ -18,6 +21,8 @@ public class PRINCIPAL extends javax.swing.JFrame
     public PRINCIPAL()
     {
         initComponents();
+        setLocationRelativeTo(null);
+        this.setExtendedState(MAXIMIZED_BOTH);
     }
 
     /**
@@ -40,6 +45,15 @@ public class PRINCIPAL extends javax.swing.JFrame
         BTN_INGRESAR_CLIENTE = new javax.swing.JButton();
         BTN_NUEVOCLIENTE_CLIENTE = new javax.swing.JButton();
         JD_NUEVOCLIENTE = new javax.swing.JDialog();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        CT_Nombre_NUEVOCLIENTE = new javax.swing.JTextField();
+        CT_Apellido_NUEVOCLIENTE = new javax.swing.JTextField();
+        CT_ID_NUEVOCLIENTE = new javax.swing.JTextField();
+        BTN_REGISTRACLIENTE_NUEVOCLIENTE = new javax.swing.JButton();
         JD_REGISTRO = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -48,6 +62,9 @@ public class PRINCIPAL extends javax.swing.JFrame
         MI_NUEVOCLIENTE = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         MI_REGISTRO = new javax.swing.JMenuItem();
+
+        JD_CLIENTE.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        JD_CLIENTE.setTitle("CLIENTE");
 
         jPanel2.setBackground(new java.awt.Color(127, 151, 168));
 
@@ -60,6 +77,14 @@ public class PRINCIPAL extends javax.swing.JFrame
 
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("ID:");
+
+        CT_ID_CLIENTE.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                CT_ID_CLIENTEKeyTyped(evt);
+            }
+        });
 
         BTN_INGRESAR_CLIENTE.setText("Ingresar");
         BTN_INGRESAR_CLIENTE.addMouseListener(new java.awt.event.MouseAdapter()
@@ -115,14 +140,14 @@ public class PRINCIPAL extends javax.swing.JFrame
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jLabel1)
-                .addGap(79, 79, 79)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(CT_ID_CLIENTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(87, 87, 87)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(CT_Nombre_CLIENTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(CT_ID_CLIENTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(56, 56, 56)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BTN_INGRESAR_CLIENTE)
@@ -141,16 +166,101 @@ public class PRINCIPAL extends javax.swing.JFrame
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        JD_NUEVOCLIENTE.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        JD_NUEVOCLIENTE.setTitle("NUEVO CLIENTE");
+
+        jPanel3.setBackground(new java.awt.Color(111, 148, 172));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel4.setText("NUEVO CLIENTE");
+
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel5.setText("Ingrese Nombre:");
+
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel6.setText("Ingrese Apellido:");
+
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel7.setText("Ingrese su ID:");
+
+        CT_ID_NUEVOCLIENTE.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyTyped(java.awt.event.KeyEvent evt)
+            {
+                CT_ID_NUEVOCLIENTEKeyTyped(evt);
+            }
+        });
+
+        BTN_REGISTRACLIENTE_NUEVOCLIENTE.setText("Registrar Nuevo Cliente");
+        BTN_REGISTRACLIENTE_NUEVOCLIENTE.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                BTN_REGISTRACLIENTE_NUEVOCLIENTEMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(220, 220, 220)
+                        .addComponent(jLabel4))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(BTN_REGISTRACLIENTE_NUEVOCLIENTE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel6)
+                                    .addComponent(jLabel7))
+                                .addGap(77, 77, 77)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CT_ID_NUEVOCLIENTE, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CT_Apellido_NUEVOCLIENTE, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CT_Nombre_NUEVOCLIENTE, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(182, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel4)
+                .addGap(38, 38, 38)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(CT_Nombre_NUEVOCLIENTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(CT_Apellido_NUEVOCLIENTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(CT_ID_NUEVOCLIENTE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39)
+                .addComponent(BTN_REGISTRACLIENTE_NUEVOCLIENTE)
+                .addContainerGap(161, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout JD_NUEVOCLIENTELayout = new javax.swing.GroupLayout(JD_NUEVOCLIENTE.getContentPane());
         JD_NUEVOCLIENTE.getContentPane().setLayout(JD_NUEVOCLIENTELayout);
         JD_NUEVOCLIENTELayout.setHorizontalGroup(
             JD_NUEVOCLIENTELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         JD_NUEVOCLIENTELayout.setVerticalGroup(
             JD_NUEVOCLIENTELayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        JD_REGISTRO.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        JD_REGISTRO.setTitle("REGISTRO");
 
         javax.swing.GroupLayout JD_REGISTROLayout = new javax.swing.GroupLayout(JD_REGISTRO.getContentPane());
         JD_REGISTRO.getContentPane().setLayout(JD_REGISTROLayout);
@@ -236,6 +346,49 @@ public class PRINCIPAL extends javax.swing.JFrame
     private void BTN_INGRESAR_CLIENTEMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_BTN_INGRESAR_CLIENTEMouseClicked
     {//GEN-HEADEREND:event_BTN_INGRESAR_CLIENTEMouseClicked
         // TODO add your handling code here:
+        if (CT_Nombre_CLIENTE.getText().isEmpty() || CT_ID_CLIENTE.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Uno o más campos están vacíos.");
+        }
+        else
+        {
+            String nombre = CT_Nombre_CLIENTE.getText();
+            int ID = Integer.parseInt(CT_ID_CLIENTE.getText());
+            
+            AdminCliente AC = new AdminCliente("./Clientes.aos");
+            AC.CargarArchivo();
+            ArrayList listaClientes = AC.getListaClientes();
+            
+            boolean nCheck = false;
+            boolean ICheck = false;
+            
+            for (int i = 0; i < listaClientes.size(); i++)
+            {
+                if (((Cliente)listaClientes.get(i)).getNombre().equals(nombre))
+                {
+                    nCheck = true;
+                    if (((Cliente)listaClientes.get(i)).getID() == ID)
+                    {
+                        ICheck = true;
+                        break;
+                    }
+                    else
+                    {
+                        nCheck = false;
+                        ICheck = false;
+                    }
+                }
+            }
+            
+            if (nCheck == true && ICheck == true)
+            {
+                JOptionPane.showMessageDialog(this, "Bienvenido Cliente.");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(this, "Datos ingresados incorrectos.");
+            }
+        }
     }//GEN-LAST:event_BTN_INGRESAR_CLIENTEMouseClicked
 
     private void BTN_NUEVOCLIENTE_CLIENTEMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_BTN_NUEVOCLIENTE_CLIENTEMouseClicked
@@ -255,6 +408,57 @@ public class PRINCIPAL extends javax.swing.JFrame
         // TODO add your handling code here:
         Abrir_REGISTRO();
     }//GEN-LAST:event_MI_REGISTROActionPerformed
+
+    private void BTN_REGISTRACLIENTE_NUEVOCLIENTEMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_BTN_REGISTRACLIENTE_NUEVOCLIENTEMouseClicked
+    {//GEN-HEADEREND:event_BTN_REGISTRACLIENTE_NUEVOCLIENTEMouseClicked
+        // TODO add your handling code here:
+        if (CT_Nombre_NUEVOCLIENTE.getText().isEmpty() || CT_Apellido_NUEVOCLIENTE.getText().isEmpty() || CT_ID_NUEVOCLIENTE.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "Uno o más campos están vacíos.");
+        }
+        else
+        {
+            String nombre = CT_Nombre_NUEVOCLIENTE.getText();
+            String apellido = CT_Apellido_NUEVOCLIENTE.getText();
+            int ID = Integer.parseInt(CT_ID_NUEVOCLIENTE.getText());
+            Cliente c = new Cliente(nombre, apellido, ID);
+            
+            AdminCliente AC = new AdminCliente("./Clientes.aos");
+            AC.CargarArchivo();
+            AC.setClente(c);
+            AC.ModificarArchivo();
+            
+            JOptionPane.showMessageDialog(this, "Nuevo Cliente agregado.");
+        }
+    }//GEN-LAST:event_BTN_REGISTRACLIENTE_NUEVOCLIENTEMouseClicked
+
+    private void CT_ID_CLIENTEKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_CT_ID_CLIENTEKeyTyped
+    {//GEN-HEADEREND:event_CT_ID_CLIENTEKeyTyped
+        // TODO add your handling code here:
+        char check = evt.getKeyChar();
+        
+        if (Character.isLetter(check)) 
+        {
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(JD_CLIENTE, "Ingrese numeros solamente");
+        }
+    }//GEN-LAST:event_CT_ID_CLIENTEKeyTyped
+
+    private void CT_ID_NUEVOCLIENTEKeyTyped(java.awt.event.KeyEvent evt)//GEN-FIRST:event_CT_ID_NUEVOCLIENTEKeyTyped
+    {//GEN-HEADEREND:event_CT_ID_NUEVOCLIENTEKeyTyped
+        // TODO add your handling code here:
+        char check = evt.getKeyChar();
+        
+        if (Character.isLetter(check)) 
+        {
+            getToolkit().beep();
+            evt.consume();
+            
+            JOptionPane.showMessageDialog(JD_NUEVOCLIENTE, "Ingrese numeros solamente");
+        }
+    }//GEN-LAST:event_CT_ID_NUEVOCLIENTEKeyTyped
 
     /**
      * @param args the command line arguments
@@ -332,8 +536,12 @@ public class PRINCIPAL extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BTN_INGRESAR_CLIENTE;
     private javax.swing.JButton BTN_NUEVOCLIENTE_CLIENTE;
+    private javax.swing.JButton BTN_REGISTRACLIENTE_NUEVOCLIENTE;
+    private javax.swing.JTextField CT_Apellido_NUEVOCLIENTE;
     private javax.swing.JTextField CT_ID_CLIENTE;
+    private javax.swing.JTextField CT_ID_NUEVOCLIENTE;
     private javax.swing.JTextField CT_Nombre_CLIENTE;
+    private javax.swing.JTextField CT_Nombre_NUEVOCLIENTE;
     private javax.swing.JDialog JD_CLIENTE;
     private javax.swing.JDialog JD_NUEVOCLIENTE;
     private javax.swing.JDialog JD_REGISTRO;
@@ -343,10 +551,15 @@ public class PRINCIPAL extends javax.swing.JFrame
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

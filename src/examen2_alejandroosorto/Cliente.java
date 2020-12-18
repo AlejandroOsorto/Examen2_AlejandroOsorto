@@ -1,14 +1,18 @@
 package examen2_alejandroosorto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Ale
  */
-public class Cliente
+public class Cliente implements Serializable
 {
     private String nombre;
     private String apellido;
     private int ID;
+    
+    private static final long SerialVersionUID = 888L;
 
     public Cliente()
     {
