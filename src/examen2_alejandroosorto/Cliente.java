@@ -1,6 +1,7 @@
 package examen2_alejandroosorto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -11,6 +12,7 @@ public class Cliente implements Serializable
     private String nombre;
     private String apellido;
     private int ID;
+    private ArrayList listaOrdenes;
     
     private static final long SerialVersionUID = 888L;
 
