@@ -109,6 +109,7 @@ public class PRINCIPAL extends javax.swing.JFrame
         MI_CLIENTE = new javax.swing.JMenuItem();
         MI_NUEVOCLIENTE = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        MI_Ordenar = new javax.swing.JMenuItem();
         MI_REGISTRO = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         MI_CerrSes = new javax.swing.JMenuItem();
@@ -528,13 +529,6 @@ public class PRINCIPAL extends javax.swing.JFrame
         jLabel24.setText("SIMULACION");
 
         BTN_INICORDEN_SIMULACION.setText("Iniciar Orden");
-        BTN_INICORDEN_SIMULACION.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
-                BTN_INICORDEN_SIMULACIONMouseClicked(evt);
-            }
-        });
         BTN_INICORDEN_SIMULACION.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -552,7 +546,7 @@ public class PRINCIPAL extends javax.swing.JFrame
             },
             new String []
             {
-                "Número Orden", "Elemento", "Tiempo"
+                "Número Orden", "Elemento", "Tiempo(Minutos)"
             }
         ));
         jScrollPane1.setViewportView(T_Elementos);
@@ -663,6 +657,17 @@ public class PRINCIPAL extends javax.swing.JFrame
         jMenu1.add(MI_NUEVOCLIENTE);
         jMenu1.add(jSeparator1);
 
+        MI_Ordenar.setText("Ordenar");
+        MI_Ordenar.setEnabled(false);
+        MI_Ordenar.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MI_OrdenarActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MI_Ordenar);
+
         MI_REGISTRO.setText("Registro de Órdenes");
         MI_REGISTRO.addActionListener(new java.awt.event.ActionListener()
         {
@@ -757,6 +762,7 @@ public class PRINCIPAL extends javax.swing.JFrame
                 
                 MI_CLIENTE.setEnabled(false);
                 MI_NUEVOCLIENTE.setEnabled(false);
+                MI_Ordenar.setEnabled(true);
                 MI_CerrSes.setEnabled(true);
                 
                 Abrir_MENU();
@@ -872,22 +878,6 @@ public class PRINCIPAL extends javax.swing.JFrame
         }
     }//GEN-LAST:event_BTN_SIMULAR_MENUMouseClicked
 
-    private void BTN_INICORDEN_SIMULACIONMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_BTN_INICORDEN_SIMULACIONMouseClicked
-    {//GEN-HEADEREND:event_BTN_INICORDEN_SIMULACIONMouseClicked
-        // TODO add your handling code here:
-        //HP.start();
-        //HB.start();
-        //HPU.start();
-        //HPA.start();
-        //HF.start();
-        //HPI.start();
-        
-        
-        AdminBarra AB = new AdminBarra(PB_BarraSimulacion, T_Elementos, new Elementos(Pollos, Biscs, Pur, Papas, fresc, pies), L_Elemento);
-        AB.start();
-        
-    }//GEN-LAST:event_BTN_INICORDEN_SIMULACIONMouseClicked
-
     private void MI_CerrSesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_MI_CerrSesActionPerformed
     {//GEN-HEADEREND:event_MI_CerrSesActionPerformed
         // TODO add your handling code here:
@@ -902,7 +892,17 @@ public class PRINCIPAL extends javax.swing.JFrame
     private void BTN_INICORDEN_SIMULACIONActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_BTN_INICORDEN_SIMULACIONActionPerformed
     {//GEN-HEADEREND:event_BTN_INICORDEN_SIMULACIONActionPerformed
         // TODO add your handling code here:
+        BTN_INICORDEN_SIMULACION.setEnabled(false);
+        
+        AdminBarra AB = new AdminBarra(PB_BarraSimulacion, T_Elementos, new Elementos(Pollos, Biscs, Pur, Papas, fresc, pies), L_Elemento);
+        AB.start();
     }//GEN-LAST:event_BTN_INICORDEN_SIMULACIONActionPerformed
+
+    private void MI_OrdenarActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_MI_OrdenarActionPerformed
+    {//GEN-HEADEREND:event_MI_OrdenarActionPerformed
+        // TODO add your handling code here:
+        Abrir_MENU();
+    }//GEN-LAST:event_MI_OrdenarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1021,6 +1021,7 @@ public class PRINCIPAL extends javax.swing.JFrame
     private javax.swing.JMenuItem MI_CLIENTE;
     private javax.swing.JMenuItem MI_CerrSes;
     private javax.swing.JMenuItem MI_NUEVOCLIENTE;
+    private javax.swing.JMenuItem MI_Ordenar;
     private javax.swing.JMenuItem MI_REGISTRO;
     private javax.swing.JProgressBar PB_BarraSimulacion;
     private javax.swing.JTable T_Elementos;

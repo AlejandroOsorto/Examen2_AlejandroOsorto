@@ -777,7 +777,6 @@
                 <Property name="text" type="java.lang.String" value="Iniciar Orden"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="BTN_INICORDEN_SIMULACIONMouseClicked"/>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BTN_INICORDEN_SIMULACIONActionPerformed"/>
               </Events>
             </Component>
@@ -796,7 +795,7 @@
                       <Table columnCount="3" rowCount="3">
                         <Column editable="true" title="N&#xfa;mero Orden" type="java.lang.Object"/>
                         <Column editable="true" title="Elemento" type="java.lang.Object"/>
-                        <Column editable="true" title="Tiempo" type="java.lang.Object"/>
+                        <Column editable="true" title="Tiempo(Minutos)" type="java.lang.Object"/>
                       </Table>
                     </Property>
                   </Properties>
@@ -852,6 +851,15 @@
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator1">
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="MI_Ordenar">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Ordenar"/>
+                <Property name="enabled" type="boolean" value="false"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MI_OrdenarActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="MI_REGISTRO">
               <Properties>

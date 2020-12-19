@@ -3,6 +3,7 @@ package examen2_alejandroosorto;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
 import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -34,7 +35,7 @@ public class AdminBarra extends Thread
     private boolean avancePie;
     
     private int num = 0;
-    private int numOrden = 0;
+    private int numOrden = 1;
 
     public AdminBarra(JProgressBar barra, JTable tabla, Elementos elementos, JLabel elemento)
     {
@@ -102,6 +103,28 @@ public class AdminBarra extends Thread
     @Override
     public void run()
     {
+        tabla.setModel(new javax.swing.table.DefaultTableModel(new Object [][][]{}, new String []{"Número Orden", "Elemento", "Tiempo(Minutos)"}) 
+        {
+            Class[] types = new Class[]
+            {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean[]
+            {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex)
+            {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
+                return canEdit[columnIndex];
+            }
+        });
+        
         //Pollo------------------------------------------------------------------------------------------------------------
         if (elementos.getPollo() > 0)
         {
@@ -110,12 +133,17 @@ public class AdminBarra extends Thread
             {
                 if (avancePollo)
                 {
-                    barra.setValue(barra.getValue() + 10);
+                    barra.setValue(barra.getValue() + 25);
                     if (barra.getValue() == 100)
                     {
                         barra.setValue(0);
                         num++;
                         
+                        Object row[] = {numOrden, "Pollo", 4};
+                        DefaultTableModel m = (DefaultTableModel) tabla.getModel();
+                        m.addRow(row);
+                        tabla.setModel(m);
+                        numOrden++;
                     }
                 }
                 if (num == elementos.getPollo())
@@ -125,7 +153,7 @@ public class AdminBarra extends Thread
 
                 try
                 {
-                    Thread.sleep(400);
+                    Thread.sleep(1000);
                 }
                 catch (InterruptedException e) {}
             }
@@ -141,11 +169,17 @@ public class AdminBarra extends Thread
             {
                 if (avanceBisc)
                 {
-                    barra.setValue(barra.getValue() + 10);
+                    barra.setValue(barra.getValue() + 50);
                     if (barra.getValue() == 100)
                     {
                         barra.setValue(0);
                         num++;
+                        
+                        Object row[] = {numOrden, "Biscuit", 1};
+                        DefaultTableModel m = (DefaultTableModel) tabla.getModel();
+                        m.addRow(row);
+                        tabla.setModel(m);
+                        numOrden++;
                     }
                 }
                 if (num == elementos.getBisc())
@@ -155,7 +189,7 @@ public class AdminBarra extends Thread
 
                 try
                 {
-                    Thread.sleep(100);
+                    Thread.sleep(500);
                 }
                 catch (InterruptedException e) {}
             }
@@ -171,11 +205,17 @@ public class AdminBarra extends Thread
             {
                 if (avancePur)
                 {
-                    barra.setValue(barra.getValue() + 10);
+                    barra.setValue(barra.getValue() + 50);
                     if (barra.getValue() == 100)
                     {
                         barra.setValue(0);
                         num++;
+                        
+                        Object row[] = {numOrden, "Puré", 2};
+                        DefaultTableModel m = (DefaultTableModel) tabla.getModel();
+                        m.addRow(row);
+                        tabla.setModel(m);
+                        numOrden++;
                     }
                 }
                 if (num == elementos.getPur())
@@ -185,7 +225,7 @@ public class AdminBarra extends Thread
 
                 try
                 {
-                    Thread.sleep(200);
+                    Thread.sleep(1000);
                 }
                 catch (InterruptedException e) {}
             }
@@ -201,11 +241,17 @@ public class AdminBarra extends Thread
             {
                 if (avancePapa)
                 {
-                    barra.setValue(barra.getValue() + 10);
+                    barra.setValue(barra.getValue() + 40);
                     if (barra.getValue() == 100)
                     {
                         barra.setValue(0);
                         num++;
+                        
+                        Object row[] = {numOrden, "Papas", 3};
+                        DefaultTableModel m = (DefaultTableModel) tabla.getModel();
+                        m.addRow(row);
+                        tabla.setModel(m);
+                        numOrden++;
                     }
                 }
                 if (num == elementos.getPap())
@@ -215,7 +261,7 @@ public class AdminBarra extends Thread
 
                 try
                 {
-                    Thread.sleep(300);
+                    Thread.sleep(1000);
                 }
                 catch (InterruptedException e) {}
             }
@@ -231,11 +277,17 @@ public class AdminBarra extends Thread
             {
                 if (avanceFresco)
                 {
-                    barra.setValue(barra.getValue() + 10);
+                    barra.setValue(barra.getValue() + 50);
                     if (barra.getValue() == 100)
                     {
                         barra.setValue(0);
                         num++;
+                        
+                        Object row[] = {numOrden, "Refresco", 1};
+                        DefaultTableModel m = (DefaultTableModel) tabla.getModel();
+                        m.addRow(row);
+                        tabla.setModel(m);
+                        numOrden++;
                     }
                 }
                 if (num == elementos.getFresc())
@@ -245,7 +297,7 @@ public class AdminBarra extends Thread
 
                 try
                 {
-                    Thread.sleep(100);
+                    Thread.sleep(500);
                 }
                 catch (InterruptedException e) {}
             }
@@ -261,11 +313,17 @@ public class AdminBarra extends Thread
             {
                 if (avancePie)
                 {
-                    barra.setValue(barra.getValue() + 10);
+                    barra.setValue(barra.getValue() + 20);
                     if (barra.getValue() == 100)
                     {
                         barra.setValue(0);
                         num++;
+                        
+                        Object row[] = {numOrden, "Pie", 5};
+                        DefaultTableModel m = (DefaultTableModel) tabla.getModel();
+                        m.addRow(row);
+                        tabla.setModel(m);
+                        numOrden++;
                     }
                 }
                 if (num == elementos.getPie())
@@ -275,7 +333,7 @@ public class AdminBarra extends Thread
 
                 try
                 {
-                    Thread.sleep(500);
+                    Thread.sleep(1000);
                 }
                 catch (InterruptedException e) {}
             }
