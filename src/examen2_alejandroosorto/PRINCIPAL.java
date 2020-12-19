@@ -19,12 +19,15 @@ public class PRINCIPAL extends javax.swing.JFrame
      * Creates new form PRINCIPAL
      */
     
-    HiloPollo HP;
-    HiloBisc HB;
-    HiloPure HPU;
-    HiloPapa HPA;
-    HiloFresco HF;
-    HiloPie HPI;
+    String nombreCliente = "";
+    int IDCliente = 0;
+    
+    int Pollos;
+    int Biscs;
+    int Pur;
+    int Papas;
+    int fresc;
+    int pies;
     
     public PRINCIPAL()
     {
@@ -32,12 +35,6 @@ public class PRINCIPAL extends javax.swing.JFrame
         setLocationRelativeTo(null);
         this.setExtendedState(MAXIMIZED_BOTH);
         
-        HP = new HiloPollo(PB_BarraSimulacion, L_Elemento);
-        HB = new HiloBisc(PB_BarraSimulacion, L_Elemento);
-        HPU = new HiloPure(PB_BarraSimulacion, L_Elemento);
-        HPA = new HiloPapa(PB_BarraSimulacion, L_Elemento);
-        HF = new HiloFresco(PB_BarraSimulacion, L_Elemento);
-        HPI = new HiloPie(PB_BarraSimulacion, L_Elemento);
     }
 
     /**
@@ -102,7 +99,7 @@ public class PRINCIPAL extends javax.swing.JFrame
         BTN_INICORDEN_SIMULACION = new javax.swing.JButton();
         PB_BarraSimulacion = new javax.swing.JProgressBar();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        T_Elementos = new javax.swing.JTable();
         BTN_FINSIMULACION_SIMULACION = new javax.swing.JButton();
         jLabel25 = new javax.swing.JLabel();
         L_Elemento = new javax.swing.JLabel();
@@ -113,6 +110,8 @@ public class PRINCIPAL extends javax.swing.JFrame
         MI_NUEVOCLIENTE = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         MI_REGISTRO = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        MI_CerrSes = new javax.swing.JMenuItem();
 
         JD_CLIENTE.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         JD_CLIENTE.setTitle("CLIENTE");
@@ -175,12 +174,9 @@ public class PRINCIPAL extends javax.swing.JFrame
                             .addComponent(BTN_INGRESAR_CLIENTE))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addGap(49, 49, 49))
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addGap(82, 82, 82)))
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3))
+                            .addGap(49, 49, 49)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(CT_Nombre_CLIENTE)
                                 .addComponent(CT_ID_CLIENTE, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE)))))
@@ -360,7 +356,7 @@ public class PRINCIPAL extends javax.swing.JFrame
 
         JS_Pie.setModel(new javax.swing.SpinnerNumberModel(0, 0, null, 1));
 
-        BTN_SIMULAR_MENU.setText("Iniciar orden(Simulación)");
+        BTN_SIMULAR_MENU.setText("Confirmar orden(Simulación)");
         BTN_SIMULAR_MENU.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
@@ -539,8 +535,15 @@ public class PRINCIPAL extends javax.swing.JFrame
                 BTN_INICORDEN_SIMULACIONMouseClicked(evt);
             }
         });
+        BTN_INICORDEN_SIMULACION.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                BTN_INICORDEN_SIMULACIONActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        T_Elementos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null},
@@ -552,7 +555,7 @@ public class PRINCIPAL extends javax.swing.JFrame
                 "Número Orden", "Elemento", "Tiempo"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(T_Elementos);
 
         BTN_FINSIMULACION_SIMULACION.setText("Finalizar Simulación");
         BTN_FINSIMULACION_SIMULACION.setEnabled(false);
@@ -669,6 +672,18 @@ public class PRINCIPAL extends javax.swing.JFrame
             }
         });
         jMenu1.add(MI_REGISTRO);
+        jMenu1.add(jSeparator2);
+
+        MI_CerrSes.setText("Cerrar Sesión");
+        MI_CerrSes.setEnabled(false);
+        MI_CerrSes.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                MI_CerrSesActionPerformed(evt);
+            }
+        });
+        jMenu1.add(MI_CerrSes);
 
         jMenuBar1.add(jMenu1);
 
@@ -734,9 +749,16 @@ public class PRINCIPAL extends javax.swing.JFrame
             if (nCheck == true && ICheck == true)
             {
                 JOptionPane.showMessageDialog(this, "Bienvenido Cliente.");
+                nombreCliente = nombre;
+                IDCliente = ID;
                 CT_Nombre_CLIENTE.setText("");
                 CT_ID_CLIENTE.setText("");
                 JD_CLIENTE.dispose();
+                
+                MI_CLIENTE.setEnabled(false);
+                MI_NUEVOCLIENTE.setEnabled(false);
+                MI_CerrSes.setEnabled(true);
+                
                 Abrir_MENU();
             }
             else
@@ -823,8 +845,20 @@ public class PRINCIPAL extends javax.swing.JFrame
             JOptionPane.showMessageDialog(JD_MENU, "No se puede iniciar la simulacion si no se ha pedido nada.");
         }
         else
-        {
+        {           
+            Pollos = (int)JS_Pollo.getValue();
+            Biscs = (int)JS_Bisc.getValue();
+            Pur = (int)JS_Pur.getValue();
+            Papas = (int)JS_Papas.getValue();
+            fresc = (int)JS_fresco.getValue();
+            pies = (int)JS_Pie.getValue();
             
+            Orden o = new Orden(IDCliente, nombreCliente, Pollos, Biscs, Pur, Papas, fresc, pies);
+            
+            AdminOrden AO = new AdminOrden("./Ordenes.aos");
+            AO.CargarArchivo();
+            AO.setClente(o);
+            AO.ModificarArchivo();
             
             JS_Bisc.setValue(0);
             JS_Papas.setValue(0);
@@ -849,8 +883,26 @@ public class PRINCIPAL extends javax.swing.JFrame
         //HPI.start();
         
         
+        AdminBarra AB = new AdminBarra(PB_BarraSimulacion, T_Elementos, new Elementos(Pollos, Biscs, Pur, Papas, fresc, pies), L_Elemento);
+        AB.start();
         
     }//GEN-LAST:event_BTN_INICORDEN_SIMULACIONMouseClicked
+
+    private void MI_CerrSesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_MI_CerrSesActionPerformed
+    {//GEN-HEADEREND:event_MI_CerrSesActionPerformed
+        // TODO add your handling code here:
+        nombreCliente = "";
+        IDCliente = 0;
+        
+        MI_CLIENTE.setEnabled(true);
+        MI_NUEVOCLIENTE.setEnabled(true);
+        MI_CerrSes.setEnabled(false);
+    }//GEN-LAST:event_MI_CerrSesActionPerformed
+
+    private void BTN_INICORDEN_SIMULACIONActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_BTN_INICORDEN_SIMULACIONActionPerformed
+    {//GEN-HEADEREND:event_BTN_INICORDEN_SIMULACIONActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BTN_INICORDEN_SIMULACIONActionPerformed
 
     /**
      * @param args the command line arguments
@@ -967,9 +1019,11 @@ public class PRINCIPAL extends javax.swing.JFrame
     private javax.swing.JSpinner JS_fresco;
     private javax.swing.JLabel L_Elemento;
     private javax.swing.JMenuItem MI_CLIENTE;
+    private javax.swing.JMenuItem MI_CerrSes;
     private javax.swing.JMenuItem MI_NUEVOCLIENTE;
     private javax.swing.JMenuItem MI_REGISTRO;
     private javax.swing.JProgressBar PB_BarraSimulacion;
+    private javax.swing.JTable T_Elementos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1004,6 +1058,6 @@ public class PRINCIPAL extends javax.swing.JFrame
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     // End of variables declaration//GEN-END:variables
 }
